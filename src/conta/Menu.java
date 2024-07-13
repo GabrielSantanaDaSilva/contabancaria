@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import conta.model.contaCorrente;
 import conta.model.contaPoupanca;
+import conta.controller.contaController;
 import conta.model.Conta;
 import conta.util.Cores;
 
@@ -12,9 +13,13 @@ public class Menu {
 
 	public static void main(String[] args) {
 
+		contaController contas = new contaController();
+		
 		Scanner leia = new Scanner(System.in);
 
-		int opcao;
+		int opcao, numero, agencia, tipo, aniversario,numeroDestino;
+		String titular;
+		float saldo, limite, valor;
 
 		while (true) {
 
@@ -77,10 +82,28 @@ public class Menu {
 				break;
 			case 6:
 				System.out.println(Cores.TEXT_WHITE_BOLD + "Saque\n\n");
+				
+				System.out.println("Digite o Numero da conta: "); 
+				numero = leia.nextInt();
+				do {
+				System.out.println("Digite o Valor do Saque (R$): "); 
+				valor = leia.nextFloat();}
+				while(valor <= 0);
+					
+				contas.sacar (numero, valor);
+				
 				keyPress();
 				break;
 			case 7:
 				System.out.println(Cores.TEXT_WHITE_BOLD + "Depósito\n\n");
+				System.out.println("Digite o Numero da conta: "); 
+				numero = leia.nextInt();
+				do {
+				System.out.println("Digite o Valor do Depósito (R$): "); 
+				valor = leia.nextFloat();}
+				while(valor <= 0);
+					
+				contas.depositar (numero, valor);
 				keyPress();
 				break;
 			case 8:
